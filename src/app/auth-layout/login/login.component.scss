@@ -1,0 +1,61 @@
+.mainCont{
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.formCont{
+  background-color: white;
+  padding: 0;
+  border: 1px solid gainsboro;
+  border-radius: 1%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+form {
+  margin: 30px;
+}
+
+.mat-form-field {
+  margin-top: 20px;
+  width: 100%;
+}
+
+mat-checkbox {
+  padding-top: 10px;
+}
+
+p, .form-check-label {
+  font-weight: 700;
+  font-size: 17px;
+  color: #566573;
+}
+
+.form-check {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-left: 0;
+}
+
+.checkText {
+  margin-left: 15px;
+}
+
+.btn {
+  width: 100%;
+  color: #D0ECE7;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: larger;
+}
+
+h5{
+  text-align: center;
+  margin-top: 15px;
+}
+.forgotPass, a{
+  text-align: center;
+  font-weight: bold;
+  color: #1ABC9C;
+}

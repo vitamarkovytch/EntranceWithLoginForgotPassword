@@ -1,3 +1,34 @@
-<p>
-  login works!
-</p>
+<div class="mainCont">
+<div class="formCont">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <p>Sign in with your Flatkit Account</p>
+
+    <mat-form-field appearance="legacy">
+      <input matInput formControlName="email"
+             placeholder="Email">
+      <mat-error *ngIf="form.get('email').invalid">{{getErrorMessageEmail()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <input matInput formControlName="password"
+             placeholder="Password">
+      <mat-error *ngIf="form.get('password').invalid">{{getErrorMessagePassword()}}
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-check">
+      <mat-checkbox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+      <label class="form-check-label checkText">Keep me signed in</label>
+    </div>
+
+    <button class="btn btn-primary" [disabled]="form.invalid">Sign in</button>
+
+  </form>
+</div>
+
+<h5 class="forgotPass"><a routerLink="/forgot-password">Forgot password?</a></h5>
+<h5 class="noAccount">Do not have an account? <a routerLink="/registration">Sing up</a></h5>
+
+
+</div>
