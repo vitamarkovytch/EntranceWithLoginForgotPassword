@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
+import {ServerService} from '../../service/server.service';
+import {DataService} from '../../service/data.service';
+import {Message} from '../../models/message.model';
 
 @Component({
   selector: 'app-forgotten-pass',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgottenPassComponent implements OnInit {
 
-  constructor() { }
+  constructor(private server: ServerService,
+              private dataService: DataService) {
+  }
+
+  message: Message;
+  email: string;
 
   ngOnInit() {
+    this.email = this.dataService.getEmail();
   }
 
 }

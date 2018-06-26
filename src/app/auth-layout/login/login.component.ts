@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 
 import {ServerService} from '../../service/server.service';
 import {DataService} from '../../service/data.service';
+import {Message} from '../../models/message.model';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +21,10 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
   checked = false;
+  message: Message;
 
   ngOnInit() {
+    this.message = new Message('danger', '');
     this.form = new FormGroup({
       'email': new FormControl('', [Validators.required, Validators.email]),
       'password': new FormControl('', [Validators.required])
@@ -60,14 +63,20 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/home']);
 
         } else if (data['error'].code === 1) {
-          console.log(data['error'].description);
-          // show error message on screen
+          this.showMessage(data['error'].description);
+
         } else if (data['error'].code === 2) {
-          console.log(data['error'].description);
+          this.showMessage(data['error'].description);
           this.dataService.saveEmail(emailPass.email);
-          // show error message on screen
         }
       }
     );
+  }
+
+  private showMessage(text: string, type: string = 'danger') {
+    this.message = new Message(type, text);
+    window.setTimeout(() => {
+      this.message.text = '';
+    }, 4000);
   }
 }
