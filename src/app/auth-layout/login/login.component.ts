@@ -22,9 +22,6 @@ export class LoginComponent implements OnInit {
   checked = false;
 
   ngOnInit() {
-    /*if (this.dataService.getName() !== '' && this.dataService.getSurname() !== '') {
-      this.router.navigate(['/home']);
-    }*/
     this.form = new FormGroup({
       'email': new FormControl('', [Validators.required, Validators.email]),
       'password': new FormControl('', [Validators.required])
@@ -47,18 +44,28 @@ export class LoginComponent implements OnInit {
       email: this.form.value.email,
       password: this.form.value.password
     };
+
     this.server.login(emailPass).subscribe(
       data => {
-        if (data.error === null) {
-          localStorage.setItem('firstName', JSON.stringify(data.user.profile.first_name));
-          localStorage.setItem('lastName', JSON.stringify(data.user.profile.last_name));
+        if (data['error'] === null) {
+          const dataName = JSON.stringify(data['user'].profile.first_name);
+          const dataSurname = JSON.stringify(data['user'].profile.last_name);
+          if (this.checked) {
+            localStorage.setItem('firstName', dataName);
+            localStorage.setItem('lastName', dataSurname);
+          } else {
+            this.dataService.saveName(dataName);
+            this.dataService.saveSurname(dataSurname);
+          }
           this.router.navigate(['/home']);
-        } else if (data.error.code === 1) {
-          console.log(data.error.description);
+
+        } else if (data['error'].code === 1) {
+          console.log(data['error'].description);
           // show error message on screen
-        } else if (data.error.code === 2) {
-          console.log(data.error.description);
-          // save email to service (string)
+        } else if (data['error'].code === 2) {
+          console.log(data['error'].description);
+          this.dataService.saveEmail(emailPass.email);
+          // show error message on screen
         }
       }
     );

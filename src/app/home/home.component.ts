@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
+import {DataService} from '../service/data.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,7 +10,8 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private dataService: DataService) { }
 
   firstName = '';
   lastName = '';
@@ -18,7 +21,10 @@ export class HomeComponent implements OnInit {
     const surname = JSON.parse(localStorage.getItem('lastName'));
     if (name && surname) {
       this.firstName = name;
-        this.lastName = surname;
+      this.lastName = surname;
+    } else if (this.dataService.getName() && this.dataService.getSurname()) {
+      this.firstName = this.dataService.getName();
+      this.lastName = this.dataService.getSurname();
     } else {
       this.router.navigate(['/login']);
     }
@@ -26,7 +32,7 @@ export class HomeComponent implements OnInit {
 
   logOut() {
     localStorage.clear();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
 }
