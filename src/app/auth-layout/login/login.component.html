@@ -22,12 +22,14 @@
       <label class="form-check-label checkText">Keep me signed in</label>
     </div>
 
-    <button class="btn btn-primary" [disabled]="form.invalid">Sign in</button>
+    <div *ngIf="message.text" class="alert alert-{{message.type}}">{{message.text}}</div>
+
+    <button *ngIf="!message.text" class="btn btn-primary" [disabled]="form.invalid">Sign in</button>
 
   </form>
 </div>
 
-<h5 class="forgotPass"><a routerLink="/forgot-password">Forgot password?</a></h5>
+<h5 class="forgotPass"><a routerLink="/auth/forgot-password">Forgot password?</a></h5>
 <h5 class="noAccount">Do not have an account? <a routerLink="/registration">Sing up</a></h5>
 
 

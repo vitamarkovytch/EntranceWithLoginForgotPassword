@@ -1,23 +1,33 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+
+import {ServerService} from '../../service/server.service';
+import {DataService} from '../../service/data.service';
+import {Message} from '../../models/message.model';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
 
-  constructor() {
+  constructor(private server: ServerService,
+              private dataService: DataService,
+              private router: Router) {
   }
 
   form: FormGroup;
   checked = false;
+  message: Message;
 
   ngOnInit() {
+    this.message = new Message('danger', '');
     this.form = new FormGroup({
-      'email': new FormControl('', [ Validators.required, Validators.email ]),
-      'password': new FormControl('', [ Validators.required ])
+      'email': new FormControl('', [Validators.required, Validators.email]),
+      'password': new FormControl('', [Validators.required])
     });
   }
 
@@ -33,6 +43,40 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
+    const emailPass = {
+      email: this.form.value.email,
+      password: this.form.value.password
+    };
+
+    this.server.login(emailPass).subscribe(
+      data => {
+        if (data['error'] === null) {
+          const dataName = JSON.stringify(data['user'].profile.first_name);
+          const dataSurname = JSON.stringify(data['user'].profile.last_name);
+          if (this.checked) {
+            localStorage.setItem('firstName', dataName);
+            localStorage.setItem('lastName', dataSurname);
+          } else {
+            this.dataService.saveName(dataName);
+            this.dataService.saveSurname(dataSurname);
+          }
+          this.router.navigate(['/home']);
+
+        } else if (data['error'].code === 1) {
+          this.showMessage(data['error'].description);
+
+        } else if (data['error'].code === 2) {
+          this.showMessage(data['error'].description);
+          this.dataService.saveEmail(emailPass.email);
+        }
+      }
+    );
+  }
+
+  private showMessage(text: string, type: string = 'danger') {
+    this.message = new Message(type, text);
+    window.setTimeout(() => {
+      this.message.text = '';
+    }, 4000);
   }
 }
