@@ -15,4 +15,9 @@ export class ServerService {
     return this.http.post(url, data);
   }
 
+  forgotPassword(data) {
+    const url = this.baseUrl + '/forgot-password.php';
+    return this.http.post(url, data);
+  }
+
 }

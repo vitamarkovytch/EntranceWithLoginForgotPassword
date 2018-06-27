@@ -18,3 +18,63 @@
 .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background{
   background-color: #D5DBDB;
 }
+
+.mat-form-field-infix{
+  border-top: 5px;
+}
+
+/*Login & ForgotPass*/
+.mainCont{
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.formCont{
+  background-color: white;
+  padding: 0;
+  border: 1px solid gainsboro;
+  border-radius: 1%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+form {
+  margin: 30px;
+}
+
+.mat-form-field {
+  margin-top: 20px;
+  width: 100%;
+}
+
+p, .form-check-label {
+  font-weight: 700;
+  font-size: 17px;
+  color: #566573;
+}
+
+h5{
+  text-align: center;
+  margin-top: 15px;
+}
+.forgotPass, a{
+  text-align: center;
+  font-weight: bold;
+  color: #1ABC9C;
+}
+
+
+/*Home & Registration*/
+.cont{
+  position: relative;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.title{
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+}

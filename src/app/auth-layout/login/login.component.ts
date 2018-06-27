@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
-import {ServerService} from '../../service/server.service';
-import {DataService} from '../../service/data.service';
-import {Message} from '../../models/message.model';
+import {ServerService} from '../../shared/service/server.service';
+import {DataService} from '../../shared/service/data.service';
+import {Message} from '../../shared/models/message.model';
 
 @Component({
   selector: 'app-login',
@@ -68,6 +68,8 @@ export class LoginComponent implements OnInit {
         } else if (data['error'].code === 2) {
           this.showMessage(data['error'].description);
           this.dataService.saveEmail(emailPass.email);
+        } else {
+          this.showMessage('Server error. Check your internet or contact to administrator');
         }
       }
     );
