@@ -1,4 +1,27 @@
-<p>
-  forgotten-pass works!
-</p>
-<div>{{email}}</div>
+<div class="mainCont">
+  <div class="formCont">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <p>Forgot your password?</p>
+      <h6 class="smaller">Enter your email address below and we will send you instructions
+        on how to change your password?</h6>
+
+      <mat-form-field >
+        <label>Your Email</label>
+
+        <input matInput formControlName="email">
+        <mat-error *ngIf="form.get('email').invalid">{{getErrorMessageEmail()}}</mat-error>
+      </mat-form-field>
+
+      <div *ngIf="message.text" class="alert alert-{{message.type}}">{{message.text}}</div>
+
+      <button *ngIf="!message.text" class="btn btn-primary" [disabled]="form.invalid">Send</button>
+
+    </form>
+  </div>
+
+  <h5 class="noAccount">Return to <a routerLink="/auth/login">Sing in</a></h5>
+
+
+</div>
+
