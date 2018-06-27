@@ -57,8 +57,8 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('firstName', dataName);
             localStorage.setItem('lastName', dataSurname);
           } else {
-            this.dataService.saveName(dataName);
-            this.dataService.saveSurname(dataSurname);
+            this.dataService.saveName(data['user'].profile.first_name);
+            this.dataService.saveSurname(data['user'].profile.last_name);
           }
           this.router.navigate(['/home']);
 

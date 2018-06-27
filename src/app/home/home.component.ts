@@ -22,11 +22,9 @@ export class HomeComponent implements OnInit {
     if (name && surname) {
       this.firstName = name;
       this.lastName = surname;
-    } else if (this.dataService.getName() && this.dataService.getSurname()) {
+    } else {
       this.firstName = this.dataService.getName();
       this.lastName = this.dataService.getSurname();
-    } else {
-      this.router.navigate(['/login']);
     }
   }
 

@@ -24,10 +24,11 @@ export class ForgottenPassComponent implements OnInit {
 
   ngOnInit() {
     this.message = new Message('', '');
-    this.emailReceived = this.dataService.getEmail();
     this.form = new FormGroup({
       'email': new FormControl('', [Validators.required, Validators.email])
     });
+    this.emailReceived = this.dataService.getEmail();
+    /*SETTING EMAIL TO THE FORM FIELD FROM LOGIN PAGE*/
     if (this.emailReceived) {
       this.form.get('email').setValue(this.emailReceived);
     }
