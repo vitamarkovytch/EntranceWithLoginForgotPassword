@@ -68,6 +68,8 @@ export class LoginComponent implements OnInit {
         } else if (data['error'].code === 2) {
           this.showMessage(data['error'].description);
           this.dataService.saveEmail(emailPass.email);
+        } else {
+          this.showMessage('Server error. Check your internet or contact to administrator');
         }
       }
     );

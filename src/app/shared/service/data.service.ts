@@ -34,4 +34,8 @@ export class DataService {
   getSurname() {
     return this.surname;
   }
+
+  deleteEmail() {
+    this.email = '';
+  }
 }
